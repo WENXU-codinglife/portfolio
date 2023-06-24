@@ -7,8 +7,85 @@
     <link rel="stylesheet" href="index.css" />
     <title>Document</title>
   </head>
+  <script>
+    window.addEventListener(
+      "scroll",
+      function (event) {
+        event.preventDefault();
+      },
+      { passive: false }
+    );
+
+    function switchPageByClicking(pageId) {
+      // Get all pages
+      const pages = document.getElementsByClassName("slide");
+
+      // Get all icons
+      const icons = document.getElementsByClassName("icon-button");
+
+      // Hide all pages
+      for (var i = 0; i < pages.length; i++) {
+        pages[i].classList.remove("active");
+      }
+
+      // Deactivate all icons
+      for (var i = 0; i < icons.length; i++) {
+        icons[i].classList.remove("focused");
+      }
+
+      // Show the selected page with fade-in effect
+      var selectedPage = document.getElementById(pageId);
+      selectedPage.classList.add("active");
+
+      // Corresponding icon highlighted
+      var selectedIcon = document.getElementById(`${pageId}-icon`);
+      selectedIcon.classList.add("focused");
+    }
+    let scrolled = false;
+    function handleScroll(event) {
+      if (scrolled) return;
+      scrolled = true;
+      const delta = event.deltaY || event.detail || -event.wheelDelta;
+      console.log(delta);
+      const slides = document.querySelectorAll(".slide");
+      const icons = document.querySelectorAll(".icon-button");
+
+      let currentSlide = -1;
+
+      for (let i = 0; i < slides.length; i++) {
+        if (slides[i].classList.contains("active")) {
+          currentSlide = i;
+          break;
+        }
+      }
+
+      if (delta < 0 && currentSlide > 0) {
+        slides[currentSlide].classList.remove("active");
+        slides[currentSlide - 1].classList.add("active");
+        icons[currentSlide].classList.remove("focused");
+        icons[currentSlide - 1].classList.add("focused");
+      } else if (delta > 0 && currentSlide < slides.length - 1) {
+        slides[currentSlide].classList.remove("active");
+        slides[currentSlide + 1].classList.add("active");
+        icons[currentSlide].classList.remove("focused");
+        icons[currentSlide + 1].classList.add("focused");
+      }
+      setTimeout(function () {
+        scrolled = false;
+      }, 1500);
+    }
+
+    //Register the event listener when the document is ready
+    document.addEventListener("DOMContentLoaded", function () {
+      // Add event listener for scroll events
+      document.addEventListener("wheel", handleScroll);
+      document.addEventListener("mousewheel", handleScroll);
+      document.addEventListener("DOMMouseScroll", handleScroll);
+    });
+  </script>
+
   <body>
-    <div class="container">
+    <div ic="container" class="container">
       <div class="board">
         <div class="profile">
           <div class="profile-info">
@@ -64,50 +141,200 @@
           <button class="hire-me-button">HIRE ME</button>
         </div>
         <div class="slides">
-          <p>slides</p>
+          <div id="greetings" class="slide active">
+            <div class="slide-tag">
+              <img
+                src="assets/icons/home-16.svg"
+                alt="home-icon"
+                class="slide-icon"
+              />
+              <div>Greetings</div>
+            </div>
+            <h1>Welcome to Xu Wen's portfolio!</h1>
+            <h1>Explore my journey as a passionate programmer!</h1>
+            <p>
+              I enjoy designing, implementing and sharing creative and
+              interesting programs.
+            </p>
+          </div>
+          <div id="about" class="slide">
+            <div class="slide-tag">
+              <img
+                src="assets/icons/user-16.svg"
+                alt="about-icon"
+                class="slide-icon"
+              />
+              <div>About Me</div>
+            </div>
+            <h1>My Story</h1>
+            <p>
+              As a new grad from Simon Fraser University with a background in
+              civil engineering, I discovered my true passion for programming
+              and embarked on a career transition. I embraced the world of
+              computing science, embracing the creativity and challenges it
+              offers. Let me share with you my exciting journey.
+            </p>
+            <ul>
+              <li>Analytical thinking and problem-solving</li>
+              <li>Attention to detail and precision</li>
+              <li>Strong communication and teamwork</li>
+              <li>Adaptability and willingness to learn</li>
+              <li>Project management and organization</li>
+            </ul>
+          </div>
+          <div id="experience" class="slide">
+            <div class="slide-tag">
+              <img
+                src="assets/icons/experience-16.svg"
+                alt="experience-icon"
+                class="slide-icon"
+              />
+              <div>Experience</div>
+            </div>
+            <h1>Education & Experience</h1>
+            <div class="timeline-container">
+              <div class="dotted-timeline"></div>
+              <div class="year">2003</div>
+              <div class="experience-item">
+                <div class="experience-box left">
+                  <div class="experience-title">B.E. - Civil Engineering</div>
+                  <div class="experience-organization">
+                    Hohai University (Nanjing, China)
+                  </div>
+                </div>
+                <div class="timeline">
+                  <div class="time-dot"></div>
+                </div>
+                <div class="experience-box right"></div>
+              </div>
+              <div class="year">2007</div>
+              <div class="experience-item">
+                <div class="experience-box left"></div>
+                <div class="timeline">
+                  <div class="time-dot"></div>
+                </div>
+                <div class="experience-box right">
+                  <div class="experience-title">M.E. - Civil Engineering</div>
+                  <div class="experience-organization">
+                    Hohai University (Nanjing, China)
+                  </div>
+                </div>
+              </div>
+              <div class="year">2010</div>
+              <div class="experience-item">
+                <div class="experience-box left">
+                  <div class="experience-title">
+                    Project Manager (Geotechnical Engineering)
+                  </div>
+                  <div class="experience-organization">
+                    TIGIS (Tianjin, China)
+                  </div>
+                </div>
+                <div class="timeline">
+                  <div class="time-dot"></div>
+                </div>
+                <div class="experience-box right"></div>
+              </div>
+              <div class="year">2018</div>
+              <div class="year">2019</div>
+              <div class="experience-item">
+                <div class="experience-box left">
+                  <div class="experience-title">
+                    Software Developer (10 months)
+                  </div>
+                  <div class="experience-organization">
+                    Stealth Mode Startup (Remote, Canada)
+                  </div>
+                </div>
+                <div class="timeline">
+                  <div class="time-dot"></div>
+                </div>
+                <div class="experience-box right">
+                  <div class="experience-title">BSc - Computing Science</div>
+                  <div class="experience-organization">
+                    Simon Fraser University (British Columbia, Canada)
+                  </div>
+                </div>
+              </div>
+              <div class="year">2022</div>
+              <div class="dotted-timeline"></div>
+            </div>
+          </div>
+          <div id="skillset" class="slide">
+            <div class="slide-tag">
+              <img
+                src="assets/icons/skills-16.svg"
+                alt="skills-icon"
+                class="slide-icon"
+              />
+              <div>Skillset</div>
+            </div>
+            <h1>My Skillset</h1>
+          </div>
+          <div id="project" class="slide">project</div>
+          <div id="co-op" class="slide">co-op</div>
+          <div id="contact" class="slide">contact</div>
         </div>
         <div class="icons">
           <!-- <div class="shine"> -->
           <img
+            id="greetings-icon"
             src="assets/icons/home-20.svg"
             alt="home-button"
-            class="icon-button"
+            class="icon-button focused"
+            onclick="switchPageByClicking('greetings')"
           />
           <!-- </div> -->
           <!-- <div class="shine"> -->
           <img
+            id="about-icon"
             src="assets/icons/user-20.svg"
             alt="user-button"
             class="icon-button"
+            onclick="switchPageByClicking('about')"
           />
           <!-- </div>
           <div class="shine"> -->
           <img
+            id="experience-icon"
             src="assets/icons/work-20.svg"
             alt="work-button"
             class="icon-button"
+            onclick="switchPageByClicking('experience')"
           />
           <!-- </div>
           <div class="shine"> -->
           <img
+            id="skillset-icon"
             src="assets/icons/skills-20.svg"
             alt="skills-button"
             class="icon-button"
+            onclick="switchPageByClicking('skillset')"
           />
           <!-- </div>
           <div class="shine"> -->
           <img
+            id="project-icon"
             src="assets/icons/project-20.svg"
             alt="project-button"
-            `
             class="icon-button"
+            onclick="switchPageByClicking('project')"
           />
           <!-- </div>
           <div class="shine"> -->
           <img
+            id="co-op-icon"
             src="assets/icons/experience-20.svg"
             alt="experience-button"
             class="icon-button"
+            onclick="switchPageByClicking('co-op')"
+          />
+          <img
+            id="contact-icon"
+            src="assets/icons/contact-20.svg"
+            alt="experience-button"
+            class="icon-button"
+            onclick="switchPageByClicking('contact')"
           />
           <!-- </div> -->
         </div>
