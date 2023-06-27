@@ -82,6 +82,8 @@
       document.addEventListener("mousewheel", handleScroll);
       document.addEventListener("DOMMouseScroll", handleScroll);
     });
+
+    let commenterProfileImage = "assets/imgs/moj.jpeg";
   </script>
 
   <body>
@@ -138,7 +140,7 @@
               </div>
             </div>
           </div>
-          <button class="hire-me-button">HIRE ME</button>
+          <button class="main-button">HIRE ME</button>
         </div>
         <div class="slides">
           <div id="greetings" class="slide active">
@@ -272,8 +274,119 @@
             <h1>My Skillset</h1>
           </div>
           <div id="project" class="slide">project</div>
-          <div id="co-op" class="slide">co-op</div>
-          <div id="contact" class="slide">contact</div>
+          <div id="co-op" class="slide">
+            <div class="slide-tag">
+              <img
+                src="assets/icons/experience-16.svg"
+                alt="co-op-icon"
+                class="slide-icon"
+              />
+              <div>Co-op</div>
+            </div>
+            <h1>Co-op Working Experience</h1>
+            <p>
+              Software Engineer (July 2021 - April 2022) at Safronica Ltd.
+              (Stealth Mode Startup):
+            </p>
+            <ul>
+              <li>
+                Developed mobile applications for iOS and Android using React
+                Native and Firebase
+              </li>
+              <li>Built promotional web pages using React</li>
+              <li>
+                Implemented and deployed Python scripts on Google Cloud Virtual
+                Machine for data processing
+              </li>
+              <li>Maintained, updated, and debugged existing applications</li>
+              <li>
+                Provided documentation, troubleshooting solutions, and tutorials
+              </li>
+            </ul>
+            <div class="comment-card-container">
+              <div class="comment-card">
+                <div class="person">
+                  <img src="assets/imgs/moj.jpeg" alt="moj profile" />
+                  <div class="name-and-title">
+                    <div class="commenter-name">Moj</div>
+                    <div class="commenter-title">Team Leader</div>
+                  </div>
+                </div>
+                <div class="comment-content">
+                  "Xu impressed me when I interviewed him with his smartness and
+                  sharpness. He did a good work and valuable contribution to our
+                  product."
+                </div>
+                <!-- <div class="comment-card-switching">
+                  <button class="comment-card-switching-button">
+                    <img src="assets/icons/left.svg" alt="left" />
+                  </button>
+                  <button class="comment-card-switching-button">
+                    <img src="assets/icons/right.svg" alt="right" />
+                  </button>
+                </div> -->
+              </div>
+            </div>
+          </div>
+          <div id="contact" class="slide">
+            <div class="slide-tag">
+              <img
+                src="assets/icons/contact-16.svg"
+                alt="contact-icon"
+                class="slide-icon"
+              />
+              <div>Contact</div>
+            </div>
+            <h1>Let's Work Together</h1>
+            <div class="contact-page">
+              <span class="contact-email">wxxq84@gmail.com</span>
+              <span class="contact-note"
+                >* Marked fields are required to fill.</span
+              >
+              <div class="contact-form">
+                <div class="contact-row">
+                  <div class="contact-element-small">
+                    <span class="input-title">FULL NAME*</span>
+                    <input type="text" />
+                  </div>
+                  <div class="contact-element-small">
+                    <span class="input-title">EMAIL*</span>
+                    <input type="email" />
+                  </div>
+                </div>
+                <div class="contact-row">
+                  <div class="contact-element-small">
+                    <div class="input-title-wrapper">
+                      <span class="input-title">PHONE</span>
+                      <span class="input-optional">(Optional)</span>
+                    </div>
+                    <input type="text" />
+                  </div>
+                  <div class="contact-element-small">
+                    <div class="input-title-wrapper">
+                      <span class="input-title">ORGANIZATION</span>
+                      <span class="input-optional">(Optional)</span>
+                    </div>
+                    <input type="text" />
+                  </div>
+                </div>
+                <div class="contact-row">
+                  <div class="contact-element-large">
+                    <span class="input-title">MESSAGE</span>
+                    <textarea
+                      id="story"
+                      name="story"
+                      rows="5"
+                      cols="33"
+                    ></textarea>
+                  </div>
+                </div>
+                <div class="contact-row">
+                  <button class="main-button">SEND MESSAGE</button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="icons">
           <!-- <div class="shine"> -->
