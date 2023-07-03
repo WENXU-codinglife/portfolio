@@ -7,6 +7,16 @@
     <link rel="stylesheet" href="index.css" />
     <title>Document</title>
   </head>
+  <script
+    type="text/javascript"
+    src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"
+  ></script>
+  <script>
+    (function () {
+      emailjs.init("my9mhkh7IhoGtU0gT");
+    })();
+  </script>
+
   <script>
     window.addEventListener(
       "scroll",
@@ -136,6 +146,42 @@
       slides[currIndex].classList.add("card-active");
       currentCardNum.textContent = currIndex + 1;
     }
+
+    // handle send message
+    function sendMessageHandler() {
+      const fullname = document.getElementById("full-name").value;
+      const email = document.getElementById("email").value;
+      const phone = document.getElementById("phone").value;
+      const organization = document.getElementById("organization").value;
+      const message = document.getElementById("message").value;
+      if (!fullname || !email) {
+        alert("Please fill out all the required fields!");
+        return;
+      }
+      emailjs
+        .send("service_s699y2v", "template_4fzi9f3", {
+          to_name: "Xu",
+          from_name: fullname,
+          from_email: email,
+          phone_no: phone,
+          organization: organization,
+          message: message,
+        })
+        .then(
+          function (response) {
+            console.log(
+              "Email sent successfully!",
+              response.status,
+              response.text
+            );
+            // Add your success message or any other desired actions
+          },
+          function (error) {
+            console.error("Error sending email:", error);
+            // Add your error message or any other desired actions
+          }
+        );
+    }
   </script>
 
   <body>
@@ -192,23 +238,25 @@
               </div>
             </div>
           </div>
-          <button class="main-button">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              class="w-6 h-6"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"
-              />
-            </svg>
-            HIRE ME
-          </button>
+          <a href="mailto:your-email@example.com">
+            <button class="main-button">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-6 h-6"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"
+                />
+              </svg>
+              HIRE ME
+            </button>
+          </a>
         </div>
         <div class="slides">
           <div id="greetings" class="slide active">
@@ -1037,15 +1085,15 @@
               <span class="contact-note"
                 >* Marked fields are required to fill.</span
               >
-              <div class="contact-form">
+              <form class="contact-form">
                 <div class="contact-row">
                   <div class="contact-element-small">
                     <span class="input-title">FULL NAME*</span>
-                    <input type="text" />
+                    <input id="full-name" type="text" required />
                   </div>
                   <div class="contact-element-small">
                     <span class="input-title">EMAIL*</span>
-                    <input type="email" />
+                    <input id="email" type="email" required />
                   </div>
                 </div>
                 <div class="contact-row">
@@ -1054,21 +1102,21 @@
                       <span class="input-title">PHONE</span>
                       <span class="input-optional">(Optional)</span>
                     </div>
-                    <input type="text" />
+                    <input id="phone" type="text" />
                   </div>
                   <div class="contact-element-small">
                     <div class="input-title-wrapper">
                       <span class="input-title">ORGANIZATION</span>
                       <span class="input-optional">(Optional)</span>
                     </div>
-                    <input type="text" />
+                    <input id="organization" type="text" />
                   </div>
                 </div>
                 <div class="contact-row">
                   <div class="contact-element-large">
                     <span class="input-title">MESSAGE</span>
                     <textarea
-                      id="story"
+                      id="message"
                       name="story"
                       rows="5"
                       cols="33"
@@ -1076,7 +1124,12 @@
                   </div>
                 </div>
                 <div class="contact-row">
-                  <button class="main-button">
+                  <button
+                    id="send-message"
+                    type="submit"
+                    class="main-button"
+                    onclick="sendMessageHandler()"
+                  >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -1094,7 +1147,7 @@
                     SEND MESSAGE
                   </button>
                 </div>
-              </div>
+              </form>
             </div>
           </div>
         </div>
