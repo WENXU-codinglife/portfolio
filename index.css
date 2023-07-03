@@ -27,6 +27,8 @@ h1 {
 .container {
   max-height: 800px;
   min-height: 550px;
+  min-width: 1175px;
+  max-width: 1400px;
   /* height: 85%; */
   aspect-ratio: 16/9;
   width: 80%;
@@ -70,6 +72,7 @@ h1 {
   font-size: 13px;
   font-weight: 550;
 }
+
 .name {
   font-size: 36px !important;
   font-weight: 700;
@@ -94,9 +97,10 @@ h1 {
 }
 
 .profile-button-container {
+  margin-top: 12px;
   display: flex;
   justify-content: center;
-  gap: 5px;
+  gap: 15px;
 }
 .profile-button-container button {
   display: flex;
@@ -105,16 +109,17 @@ h1 {
   height: 32px;
   width: 32px;
   border-radius: 50%;
-  border: none;
-  background-color: rgba(255, 255, 255, 0);
   cursor: pointer;
+  background-color: antiquewhite;
+  border: none;
+}
+.profile-button-container button a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .profile-button-container button img:hover {
-  height: 32px;
-  width: 32px;
-  border-radius: 50%;
   backdrop-filter: blur(5px);
-  background-color: rgb(255, 255, 255);
   transform: rotate(360deg);
 }
 .profile-button-container button img {
@@ -166,21 +171,20 @@ h1 {
   padding: 15px 5px;
 }
 
-.icons img {
+.icons svg {
   cursor: pointer;
   width: 80%;
   height: auto;
   /* filter: brightness(120%); */
 }
-.icons img:hover {
-  backdrop-filter: blur(5px);
-  filter: invert(42%) sepia(93%) saturate(10%) hue-rotate(87deg)
-    brightness(119%) contrast(119%);
+.icons svg:hover {
+  color: #3d2e1e;
+  opacity: 0.5;
 }
 
 .focused {
-  filter: invert(42%) sepia(93%) saturate(1352%) hue-rotate(87deg)
-    brightness(119%) contrast(119%) !important;
+  color: #3d2e1e !important;
+  width: 110% !important;
 }
 
 .slides {
@@ -218,8 +222,6 @@ h1 {
 .slide-tag {
   margin-bottom: 20px;
   padding: 3px 5px;
-  /* border-width: thin;
-  border: solid; */
   border-radius: 999px;
   border-color: rgba(102, 102, 102, 0.5);
   background-color: antiquewhite;
@@ -258,7 +260,7 @@ ul li svg {
 }
 
 .slide-icon {
-  height: 10px;
+  height: 16px;
   width: auto;
 }
 
@@ -337,7 +339,7 @@ ul li svg {
 
 .comment-card-container {
   position: relative;
-  background-color: #aaa;
+  background-color: #3d2e1e;
   height: 150px;
   width: 310px;
   margin-top: 20px;
@@ -346,11 +348,24 @@ ul li svg {
   display: flex;
   align-items: stretch;
   padding: 30px 40px;
+  overflow: hidden;
 }
-.comment-card {
-  display: flex;
+@keyframes slide-in {
+  0% {
+    transform: translateX(120%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+.card-active {
+  display: flex !important;
   flex-direction: column;
   gap: 20px;
+  animation: slide-in 1s;
+}
+.comment-card {
+  display: none;
 }
 .person {
   display: flex;
@@ -359,7 +374,7 @@ ul li svg {
 }
 
 .commenter-name {
-  color: #ddd;
+  color: antiquewhite;
   font-size: 13px;
   font-weight: 600;
 }
@@ -374,18 +389,18 @@ ul li svg {
   border-radius: 999px;
 }
 .comment-content {
-  color: #ddd;
+  color: antiquewhite;
   font-size: 14px;
   font-weight: 500;
   line-height: 20px;
 }
 .comment-card-switching {
   position: absolute;
-  width: 300px;
-  bottom: 15px;
+  height: fit-content;
+  bottom: 6px;
+  right: 1px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
 }
 .comment-card-switching-button {
   background-color: rgba(255, 255, 255, 0);
@@ -393,18 +408,50 @@ ul li svg {
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 
-.comment-card-switching-button img {
-  width: 25px;
-  height: auto;
-  filter: invert(42%) saturate(1352%);
+@keyframes forward {
+  0% {
+    transform: translateX(0%);
+  }
+  50% {
+    transform: translateX(10%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
 }
-.comment-card-switching-button img:hover {
-  width: 25px;
+@keyframes backward {
+  0% {
+    transform: translateX(0%);
+  }
+  50% {
+    transform: translateX(-10%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+.forward:hover svg {
+  animation: forward 0.8s infinite;
+  color: antiquewhite;
+}
+.backward:hover svg {
+  animation: backward 0.8s infinite;
+  color: antiquewhite;
+}
+.comment-card-switching-button svg {
+  width: 22px;
   height: auto;
-  filter: invert(42%) saturate(1352%) hue-rotate(87deg) brightness(119%)
-    contrast(119%);
+  color: #ddd;
+}
+.comment-card-page {
+  color: #ddd;
+  font-size: 12px;
+}
+.comment-card-page span {
+  padding: 0 3px;
 }
 .contact-page {
   display: flex;
@@ -693,6 +740,7 @@ ul li svg {
 }
 .proj-el:hover .proj-thumbnail {
   animation: thumbnail-falling 2s ease-in-out;
+  box-shadow: 5px 5px 12px rgba(0, 0, 0, 0.4);
 }
 .proj-thumbnail {
   display: inline-block;

@@ -82,8 +82,6 @@
     //   document.addEventListener("DOMMouseScroll", handleScroll);
     // });
 
-    let commenterProfileImage = "assets/imgs/moj.jpeg";
-
     // skill points incrementing animation
     const skillLevels = {
       cpp: 81,
@@ -112,6 +110,31 @@
           skillLevelPoint.textContent = currentNumber;
         }
       }, 8); // Adjust the interval duration to control the counting speed
+    }
+
+    // initialize comment cards
+    function initCardCount() {
+      setTimeout(() => {
+        var commentCardCount = document.querySelector(".comment-card-count");
+        console.log("commentCardCount: ", commentCardCount);
+        commentCardCount.textContent =
+          document.getElementsByClassName("comment-card").length;
+      }, 500);
+    }
+    initCardCount();
+    // handle comment card sliding
+    function nextCard(next) {
+      var slides = document.getElementsByClassName("comment-card");
+      var currentCardNum = document.querySelector(
+        ".current-comment-card-number"
+      );
+      var currIndex = parseInt(currentCardNum.textContent) - 1;
+      var cardCount = slides.length;
+      slides[currIndex].classList.remove("card-active");
+      currIndex = next === "forward" ? currIndex + 1 : currIndex - 1;
+      currIndex = (currIndex + cardCount) % cardCount;
+      slides[currIndex].classList.add("card-active");
+      currentCardNum.textContent = currIndex + 1;
     }
   </script>
 
@@ -190,11 +213,21 @@
         <div class="slides">
           <div id="greetings" class="slide active">
             <div class="slide-tag">
-              <img
-                src="assets/icons/home-16.svg"
-                alt="home-icon"
+              <svg
                 class="slide-icon"
-              />
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-6 h-6"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M6.75 7.5l3 2.25-3 2.25m4.5 0h3m-9 8.25h13.5A2.25 2.25 0 0021 18V6a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 6v12a2.25 2.25 0 002.25 2.25z"
+                />
+              </svg>
               <div>Greetings</div>
             </div>
             <h1>Welcome to Xu Wen's portfolio!</h1>
@@ -206,11 +239,21 @@
           </div>
           <div id="about" class="slide">
             <div class="slide-tag">
-              <img
-                src="assets/icons/user-16.svg"
-                alt="about-icon"
+              <svg
                 class="slide-icon"
-              />
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-6 h-6"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
+                />
+              </svg>
               <div>About Me</div>
             </div>
             <h1>My Story</h1>
@@ -311,11 +354,21 @@
           </div>
           <div id="skillset" class="slide">
             <div class="slide-tag">
-              <img
-                src="assets/icons/skills-16.svg"
-                alt="skills-icon"
+              <svg
                 class="slide-icon"
-              />
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-6 h-6"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M13.5 16.875h3.375m0 0h3.375m-3.375 0V13.5m0 3.375v3.375M6 10.5h2.25a2.25 2.25 0 002.25-2.25V6a2.25 2.25 0 00-2.25-2.25H6A2.25 2.25 0 003.75 6v2.25A2.25 2.25 0 006 10.5zm0 9.75h2.25A2.25 2.25 0 0010.5 18v-2.25a2.25 2.25 0 00-2.25-2.25H6a2.25 2.25 0 00-2.25 2.25V18A2.25 2.25 0 006 20.25zm9.75-9.75H18a2.25 2.25 0 002.25-2.25V6A2.25 2.25 0 0018 3.75h-2.25A2.25 2.25 0 0013.5 6v2.25a2.25 2.25 0 002.25 2.25z"
+                />
+              </svg>
               <div>Skillset</div>
             </div>
             <h1>My Skillset</h1>
@@ -554,11 +607,21 @@
           </div>
           <div id="project" class="slide">
             <div class="slide-tag">
-              <img
-                src="assets/icons/project-16.svg"
-                alt="project-icon"
+              <svg
                 class="slide-icon"
-              />
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-6 h-6"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25m18 0A2.25 2.25 0 0018.75 3H5.25A2.25 2.25 0 003 5.25m18 0V12a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 12V5.25"
+                />
+              </svg>
               <div>Projects</div>
             </div>
             <h1>My Projects</h1>
@@ -659,11 +722,21 @@
           </div>
           <div id="experience" class="slide">
             <div class="slide-tag">
-              <img
-                src="assets/icons/experience-16.svg"
-                alt="experience-icon"
+              <svg
                 class="slide-icon"
-              />
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-6 h-6"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 00.75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 00-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0112 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 01-.673-.38m0 0A2.18 2.18 0 013 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 013.413-.387m7.5 0V5.25A2.25 2.25 0 0013.5 3h-3a2.25 2.25 0 00-2.25 2.25v.894m7.5 0a48.667 48.667 0 00-7.5 0M12 12.75h.008v.008H12v-.008z"
+                />
+              </svg>
               <div>Experience</div>
             </div>
             <h1>Education & Experience</h1>
@@ -737,11 +810,21 @@
           </div>
           <div id="co-op" class="slide">
             <div class="slide-tag">
-              <img
-                src="assets/icons/experience-16.svg"
-                alt="co-op-icon"
+              <svg
                 class="slide-icon"
-              />
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-6 h-6"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z"
+                />
+              </svg>
               <div>Co-op</div>
             </div>
             <h1>Co-op Working Experience</h1>
@@ -751,21 +834,98 @@
             </p>
             <ul>
               <li>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-6 h-6"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3"
+                  />
+                </svg>
+
                 Developed mobile applications for iOS and Android using React
                 Native and Firebase
               </li>
-              <li>Built promotional web pages using React</li>
               <li>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-6 h-6"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M12.75 3.03v.568c0 .334.148.65.405.864l1.068.89c.442.369.535 1.01.216 1.49l-.51.766a2.25 2.25 0 01-1.161.886l-.143.048a1.107 1.107 0 00-.57 1.664c.369.555.169 1.307-.427 1.605L9 13.125l.423 1.059a.956.956 0 01-1.652.928l-.679-.906a1.125 1.125 0 00-1.906.172L4.5 15.75l-.612.153M12.75 3.031a9 9 0 00-8.862 12.872M12.75 3.031a9 9 0 016.69 14.036m0 0l-.177-.529A2.25 2.25 0 0017.128 15H16.5l-.324-.324a1.453 1.453 0 00-2.328.377l-.036.073a1.586 1.586 0 01-.982.816l-.99.282c-.55.157-.894.702-.8 1.267l.073.438c.08.474.49.821.97.821.846 0 1.598.542 1.865 1.345l.215.643m5.276-3.67a9.012 9.012 0 01-5.276 3.67m0 0a9 9 0 01-10.275-4.835M15.75 9c0 .896-.393 1.7-1.016 2.25"
+                  />
+                </svg>
+                Built promotional web pages using React
+              </li>
+              <li>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-6 h-6"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M14.25 9.75L16.5 12l-2.25 2.25m-4.5 0L7.5 12l2.25-2.25M6 20.25h12A2.25 2.25 0 0020.25 18V6A2.25 2.25 0 0018 3.75H6A2.25 2.25 0 003.75 6v12A2.25 2.25 0 006 20.25z"
+                  />
+                </svg>
+
                 Implemented and deployed Python scripts on Google Cloud Virtual
                 Machine for data processing
               </li>
-              <li>Maintained, updated, and debugged existing applications</li>
               <li>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-6 h-6"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.486-6.336l-3.276 3.277a3.004 3.004 0 01-2.25-2.25l3.276-3.276a4.5 4.5 0 00-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437l1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008z"
+                  />
+                </svg>
+                Maintained, updated, and debugged existing applications
+              </li>
+              <li>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-6 h-6"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"
+                  />
+                </svg>
+
                 Provided documentation, troubleshooting solutions, and tutorials
               </li>
             </ul>
             <div class="comment-card-container">
-              <div class="comment-card">
+              <div class="comment-card card-1 card-active">
                 <div class="person">
                   <img src="assets/imgs/moj.jpeg" alt="moj profile" />
                   <div class="name-and-title">
@@ -778,24 +938,97 @@
                   sharpness. He did a good work and valuable contribution to our
                   product."
                 </div>
-                <!-- <div class="comment-card-switching">
-                  <button class="comment-card-switching-button">
-                    <img src="assets/icons/left.svg" alt="left" />
-                  </button>
-                  <button class="comment-card-switching-button">
-                    <img src="assets/icons/right.svg" alt="right" />
-                  </button>
-                </div> -->
+              </div>
+              <div class="comment-card card-2">
+                <div class="person">
+                  <img src="assets/imgs/richard.jpeg" alt="richard profile" />
+                  <div class="name-and-title">
+                    <div class="commenter-name">Richard</div>
+                    <div class="commenter-title">Software Engineer</div>
+                  </div>
+                </div>
+                <div class="comment-content">
+                  "I had a very good working experience collaborating with Xu.
+                  He is quite organized and resouceful!"
+                </div>
+              </div>
+              <div class="comment-card card-3">
+                <div class="person">
+                  <img src="assets/imgs/kanwar.jpeg" alt="kanwar profile" />
+                  <div class="name-and-title">
+                    <div class="commenter-name">Kanwar</div>
+                    <div class="commenter-title">Software Engineer</div>
+                  </div>
+                </div>
+                <div class="comment-content">
+                  "Xu always gave me supports and interesting ideas."
+                </div>
+              </div>
+              <div class="comment-card-switching">
+                <button
+                  class="comment-card-switching-button backward"
+                  onclick="nextCard('backward')"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="w-6 h-6"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M11.25 9l-3 3m0 0l3 3m-3-3h7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                  </svg>
+                </button>
+                <div class="comment-card-page">
+                  <span class="current-comment-card-number">1</span>/<span
+                    class="comment-card-count"
+                    >null</span
+                  >
+                </div>
+                <button
+                  class="comment-card-switching-button forward"
+                  onclick="nextCard('forward')"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="w-6 h-6"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M12.75 15l3-3m0 0l-3-3m3 3h-7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                  </svg>
+                </button>
               </div>
             </div>
           </div>
           <div id="contact" class="slide">
             <div class="slide-tag">
-              <img
-                src="assets/icons/contact-16.svg"
-                alt="contact-icon"
+              <svg
                 class="slide-icon"
-              />
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-6 h-6"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 01-.825-.242m9.345-8.334a2.126 2.126 0 00-.476-.095 48.64 48.64 0 00-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0011.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155"
+                />
+              </svg>
               <div>Contact</div>
             </div>
             <h1>Let's Work Together</h1>
@@ -866,68 +1099,122 @@
           </div>
         </div>
         <div class="icons">
-          <!-- <div class="shine"> -->
-          <img
+          <svg
             id="greetings-icon"
-            src="assets/icons/home-20.svg"
-            alt="home-button"
             class="icon-button focused"
             onclick="switchPageByClicking('greetings')"
-          />
-          <!-- </div> -->
-          <!-- <div class="shine"> -->
-          <img
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-6 h-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M6.75 7.5l3 2.25-3 2.25m4.5 0h3m-9 8.25h13.5A2.25 2.25 0 0021 18V6a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 6v12a2.25 2.25 0 002.25 2.25z"
+            />
+          </svg>
+          <svg
             id="about-icon"
-            src="assets/icons/user-20.svg"
-            alt="user-button"
             class="icon-button"
             onclick="switchPageByClicking('about')"
-          />
-          <!-- </div>
-          <div class="shine"> -->
-
-          <!-- </div>
-          <div class="shine"> -->
-          <img
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-6 h-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
+            />
+          </svg>
+          <svg
             id="skillset-icon"
-            src="assets/icons/skills-20.svg"
-            alt="skills-button"
             class="icon-button"
             onclick="switchPageByClicking('skillset')"
-          />
-          <!-- </div>
-          <div class="shine"> -->
-          <img
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-6 h-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M13.5 16.875h3.375m0 0h3.375m-3.375 0V13.5m0 3.375v3.375M6 10.5h2.25a2.25 2.25 0 002.25-2.25V6a2.25 2.25 0 00-2.25-2.25H6A2.25 2.25 0 003.75 6v2.25A2.25 2.25 0 006 10.5zm0 9.75h2.25A2.25 2.25 0 0010.5 18v-2.25a2.25 2.25 0 00-2.25-2.25H6a2.25 2.25 0 00-2.25 2.25V18A2.25 2.25 0 006 20.25zm9.75-9.75H18a2.25 2.25 0 002.25-2.25V6A2.25 2.25 0 0018 3.75h-2.25A2.25 2.25 0 0013.5 6v2.25a2.25 2.25 0 002.25 2.25z"
+            />
+          </svg>
+          <svg
             id="project-icon"
-            src="assets/icons/project-20.svg"
-            alt="project-button"
             class="icon-button"
             onclick="switchPageByClicking('project')"
-          />
-          <!-- </div>
-          <div class="shine"> -->
-          <img
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-6 h-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25m18 0A2.25 2.25 0 0018.75 3H5.25A2.25 2.25 0 003 5.25m18 0V12a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 12V5.25"
+            /></svg
+          ><svg
             id="experience-icon"
-            src="assets/icons/work-20.svg"
-            alt="work-button"
             class="icon-button"
             onclick="switchPageByClicking('experience')"
-          />
-          <img
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-6 h-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 00.75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 00-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0112 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 01-.673-.38m0 0A2.18 2.18 0 013 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 013.413-.387m7.5 0V5.25A2.25 2.25 0 0013.5 3h-3a2.25 2.25 0 00-2.25 2.25v.894m7.5 0a48.667 48.667 0 00-7.5 0M12 12.75h.008v.008H12v-.008z"
+            /></svg
+          ><svg
             id="co-op-icon"
-            src="assets/icons/experience-20.svg"
-            alt="experience-button"
             class="icon-button"
             onclick="switchPageByClicking('co-op')"
-          />
-          <img
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-6 h-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z"
+            /></svg
+          ><svg
             id="contact-icon"
-            src="assets/icons/contact-20.svg"
-            alt="experience-button"
             class="icon-button"
             onclick="switchPageByClicking('contact')"
-          />
-          <!-- </div> -->
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-6 h-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 01-.825-.242m9.345-8.334a2.126 2.126 0 00-.476-.095 48.64 48.64 0 00-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0011.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155"
+            />
+          </svg>
         </div>
       </div>
     </div>
