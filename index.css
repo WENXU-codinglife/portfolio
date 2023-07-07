@@ -40,8 +40,8 @@ h1 {
   aspect-ratio: 16/9;
   width: 80%;
   backdrop-filter: blur(5px);
-  background-color: rgba(255, 255, 255, 0.15);
-  box-shadow: inset 0px 0px 5px 1px #ddd;
+  background-color: rgba(255, 255, 255, 0.25);
+  box-shadow: inset 0px 0px 5px 1px rgba(255, 255, 255, 0.5);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -216,7 +216,7 @@ h1 {
   visibility: hidden;
   position: absolute;
   left: 10%;
-  transition: opacity 2.5s;
+  transition: opacity 0.5s;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -610,7 +610,7 @@ ul li svg {
 }
 
 .other-el img {
-  height: 40px;
+  height: 30px;
   width: auto;
 }
 
@@ -656,7 +656,7 @@ ul li svg {
   align-items: center;
   gap: 20px;
   opacity: 0;
-  transition: opacity 1.5s;
+  transition: opacity 0.8s;
 }
 .proj-ref {
   height: 30px;
@@ -673,23 +673,6 @@ ul li svg {
 }
 .proj-el:hover .project-tech-stack {
   visibility: hidden;
-}
-@keyframes falling {
-  0% {
-    transform: translateY(-100%);
-  }
-  30% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(50%);
-  }
-  70% {
-    transform: translateY(70%);
-  }
-  100% {
-    transform: translateY(90%);
-  }
 }
 
 @keyframes bouncing {
@@ -716,7 +699,7 @@ ul li svg {
   }
 }
 .proj-el:hover .proj-ref {
-  animation: falling 2s ease-in-out, bouncing 2s ease-in-out;
+  animation: bouncing 0.8s ease-in-out;
 }
 .proj-cover {
   border-radius: 999px;
@@ -750,7 +733,7 @@ ul li svg {
   }
 }
 .proj-el:hover .proj-thumbnail {
-  animation: thumbnail-falling 2s ease-in-out;
+  animation: thumbnail-falling 0.5s ease-in-out;
   box-shadow: 5px 5px 12px rgba(0, 0, 0, 0.4);
 }
 .proj-thumbnail {
