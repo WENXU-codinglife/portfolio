@@ -93,23 +93,49 @@
     //   document.addEventListener("DOMMouseScroll", handleScroll);
     // });
 
-    // skill points incrementing animation
-    const skillLevels = {
-      cpp: 85,
-      python: 82,
-      javascript: 85,
-      c: 81,
-      html: 82,
-      css: 85,
-      sass: 80,
-      git: 90,
-      github: 90,
-      firebase: 78,
-      reactjs: 92,
-      nodejs: 89,
-    };
-    // const skillLevelNumber = document.querySelector(".skill-level-point");
+    const skillLevels = {};
+    function readSkillset() {
+      fetch("data/skillset.json")
+        .then((response) => response.json())
+        .then((json) => {
+          for (const skill in json) {
+            skillLevels[skill] = json[skill].score;
+          }
+          loadSkillset(json);
+        })
+        .catch((error) => {
+          console.error("Error reading JSON file:", error);
+        });
+    }
+    readSkillset();
+    // load skillset
+    function loadSkillset(skills) {
+      const mainSkillsetHost = document.getElementById("main-skills");
+      console.log(mainSkillsetHost);
+      for (const skill in skills) {
+        const skillContainer = document.createElement("div");
+        skillContainer.classList.add("main-el");
+        skillContainer.onmouseover = function () {
+          countToSkillLevel(skill);
+        };
+        const skillTemplate = `  
+          <div class="front">
+            <img
+              src=${skills[skill].url}
+              alt="${skills[skill].name}"
+            />
+          </div>
+          <div class="back">
+            <label>${skills[skill].name}</label>
+            <span class="skill-level-points ${skill}">0</span>
+          </div>
+        `;
+        skillContainer.innerHTML = skillTemplate;
+        mainSkillsetHost.insertAdjacentElement("beforeend", skillContainer);
+      }
+    }
 
+    // skill points incrementing animation
     function countToSkillLevel(skill) {
       const skillLevelPoint = document.querySelector(`.${skill}`);
       if (skillLevelPoint.textContent !== "0") return;
@@ -434,185 +460,7 @@
             </div>
             <h1>My Skillset</h1>
             <div class="all-skills">
-              <div class="main-skills">
-                <div
-                  class="main-el el-1"
-                  onmouseover="countToSkillLevel('cpp')"
-                >
-                  <div class="front">
-                    <img
-                      src="https://upload.wikimedia.org/wikipedia/commons/1/18/ISO_C%2B%2B_Logo.svg"
-                      alt="c++"
-                    />
-                  </div>
-                  <div class="back">
-                    <label>C++</label
-                    ><span class="skill-level-points cpp">0</span>
-                  </div>
-                </div>
-                <div
-                  class="main-el el-2"
-                  onmouseover="countToSkillLevel('python')"
-                >
-                  <div class="front">
-                    <img
-                      src="https://www.vectorlogo.zone/logos/python/python-icon.svg"
-                      alt="python"
-                    />
-                  </div>
-                  <div class="back">
-                    <label>Python</label>
-                    <span class="skill-level-points python">0</span>
-                  </div>
-                </div>
-                <div
-                  class="main-el el-3"
-                  onmouseover="countToSkillLevel('javascript')"
-                >
-                  <div class="front">
-                    <img
-                      src="https://upload.wikimedia.org/wikipedia/commons/9/99/Unofficial_JavaScript_logo_2.svg"
-                      alt="javascript"
-                    />
-                  </div>
-                  <div class="back">
-                    <label>JavaScript</label>
-                    <span class="skill-level-points javascript">0</span>
-                  </div>
-                </div>
-                <div class="main-el el-4" onmouseover="countToSkillLevel('c')">
-                  <div class="front">
-                    <img
-                      src="https://upload.wikimedia.org/wikipedia/commons/1/18/C_Programming_Language.svg"
-                      alt="c"
-                    />
-                  </div>
-                  <div class="back">
-                    <label>C</label>
-                    <span class="skill-level-points c">0</span>
-                  </div>
-                </div>
-                <div
-                  class="main-el el-5"
-                  onmouseover="countToSkillLevel('html')"
-                >
-                  <div class="front">
-                    <img
-                      src="https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg"
-                      alt="html"
-                    />
-                  </div>
-                  <div class="back">
-                    <label>HTML5</label
-                    ><span class="skill-level-points html">0</span>
-                  </div>
-                </div>
-                <div
-                  class="main-el el-6"
-                  onmouseover="countToSkillLevel('css')"
-                >
-                  <div class="front">
-                    <img
-                      src="https://upload.wikimedia.org/wikipedia/commons/d/d5/CSS3_logo_and_wordmark.svg"
-                      alt="css"
-                    />
-                  </div>
-                  <div class="back">
-                    <label>CSS3</label
-                    ><span class="skill-level-points css">0</span>
-                  </div>
-                </div>
-                <div
-                  class="main-el el-7"
-                  onmouseover="countToSkillLevel('sass')"
-                >
-                  <div class="front">
-                    <img
-                      src="https://upload.wikimedia.org/wikipedia/commons/9/96/Sass_Logo_Color.svg"
-                      alt="sass"
-                    />
-                  </div>
-                  <div class="back">
-                    <label>Sass</label
-                    ><span class="skill-level-points sass">0</span>
-                  </div>
-                </div>
-                <div
-                  class="main-el el-8"
-                  onmouseover="countToSkillLevel('reactjs')"
-                >
-                  <div class="front">
-                    <img
-                      src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg"
-                      alt="reactjs"
-                    />
-                  </div>
-                  <div class="back">
-                    <label>ReactJS</label
-                    ><span class="skill-level-points reactjs">0</span>
-                  </div>
-                </div>
-                <div
-                  class="main-el el-9"
-                  onmouseover="countToSkillLevel('nodejs')"
-                >
-                  <div class="front">
-                    <img
-                      src="https://www.vectorlogo.zone/logos/nodejs/nodejs-icon.svg"
-                      alt="nodejs"
-                    />
-                  </div>
-                  <div class="back">
-                    <label>Node.js</label
-                    ><span class="skill-level-points nodejs">0</span>
-                  </div>
-                </div>
-                <div
-                  class="main-el el-10"
-                  onmouseover="countToSkillLevel('git')"
-                >
-                  <div class="front">
-                    <img
-                      src="https://upload.wikimedia.org/wikipedia/commons/3/3f/Git_icon.svg"
-                      alt="git"
-                    />
-                  </div>
-                  <div class="back">
-                    <label>Git</label
-                    ><span class="skill-level-points git">0</span>
-                  </div>
-                </div>
-                <div
-                  class="main-el el-11"
-                  onmouseover="countToSkillLevel('github')"
-                >
-                  <div class="front">
-                    <img
-                      src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg"
-                      alt="github"
-                    />
-                  </div>
-                  <div class="back">
-                    <label>Github</label
-                    ><span class="skill-level-points github">0</span>
-                  </div>
-                </div>
-                <div
-                  class="main-el el-12"
-                  onmouseover="countToSkillLevel('firebase')"
-                >
-                  <div class="front">
-                    <img
-                      src="https://www.vectorlogo.zone/logos/firebase/firebase-icon.svg"
-                      alt="firebase"
-                    />
-                  </div>
-                  <div class="back">
-                    <label>Firebase</label
-                    ><span class="skill-level-points firebase">0</span>
-                  </div>
-                </div>
-              </div>
+              <div class="main-skills" id="main-skills"></div>
               <div class="other-skills">
                 <div class="other-skills-row">
                   <div class="other-el other-el-1">
