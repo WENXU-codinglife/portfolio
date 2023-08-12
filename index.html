@@ -98,8 +98,8 @@
       fetch("data/skillset.json")
         .then((response) => response.json())
         .then((json) => {
-          for (const skill in json) {
-            skillLevels[skill] = json[skill].score;
+          for (const skill in json.main) {
+            skillLevels[skill] = json.main[skill].score;
           }
           loadSkillset(json);
         })
@@ -110,9 +110,9 @@
     readSkillset();
     // load skillset
     function loadSkillset(skills) {
+      // main skills
       const mainSkillsetHost = document.getElementById("main-skills");
-      console.log(mainSkillsetHost);
-      for (const skill in skills) {
+      for (const skill in skills.main) {
         const skillContainer = document.createElement("div");
         skillContainer.classList.add("main-el");
         skillContainer.onmouseover = function () {
@@ -121,17 +121,40 @@
         const skillTemplate = `  
           <div class="front">
             <img
-              src=${skills[skill].url}
-              alt="${skills[skill].name}"
+              src=${skills.main[skill].url}
+              alt="${skills.main[skill].name}"
             />
           </div>
           <div class="back">
-            <label>${skills[skill].name}</label>
+            <label>${skills.main[skill].name}</label>
             <span class="skill-level-points ${skill}">0</span>
           </div>
         `;
         skillContainer.innerHTML = skillTemplate;
         mainSkillsetHost.insertAdjacentElement("beforeend", skillContainer);
+      }
+
+      // other skills
+      const otherSkillsHost = document.getElementById("other-skills");
+      let skillRow = null;
+      console.log(skills.other);
+      for (const skill in skills.other) {
+        if (document.querySelectorAll(".other-el").length % 6 === 0) {
+          skillRow = document.createElement("div");
+          skillRow.classList.add("other-skills-row");
+        }
+
+        const skillTemplate = document.createElement("div");
+        skillTemplate.classList.add("other-el");
+        skillTemplate.innerHTML = `
+          <img
+            src=${skills.other[skill].url}
+            alt=${skills.other[skill].name}
+          />
+        `;
+        skillRow.insertAdjacentElement("beforeend", skillTemplate);
+        if (document.querySelectorAll(".other-el").length % 6 === 0)
+          otherSkillsHost.insertAdjacentElement("beforeend", skillRow);
       }
     }
 
@@ -461,72 +484,7 @@
             <h1>My Skillset</h1>
             <div class="all-skills">
               <div class="main-skills" id="main-skills"></div>
-              <div class="other-skills">
-                <div class="other-skills-row">
-                  <div class="other-el other-el-1">
-                    <img
-                      src="https://www.vectorlogo.zone/logos/pocoo_flask/pocoo_flask-ar21.svg"
-                      alt="flask"
-                    />
-                  </div>
-                  <div class="other-el other-el-2">
-                    <img
-                      src="https://upload.wikimedia.org/wikipedia/commons/9/93/MongoDB_Logo.svg"
-                      alt="mangodb"
-                    />
-                  </div>
-                  <div class="other-el other-el-5">
-                    <img
-                      src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Visual_Studio_Code_1.35_icon.svg"
-                      alt="vscode"
-                    />
-                  </div>
-                  <div class="other-el other-el-6">
-                    <img
-                      src="https://raw.githubusercontent.com/prplx/svg-logos/master/svg/docker.svg"
-                      alt="docker"
-                    />
-                  </div>
-                  <div class="other-el other-el-7">
-                    <img
-                      src="https://upload.wikimedia.org/wikipedia/commons/2/29/Postgresql_elephant.svg"
-                      alt="postgresql"
-                    />
-                  </div>
-                  <div class="other-el other-el-8">
-                    <img
-                      src="https://upload.wikimedia.org/wikipedia/commons/8/82/Gnu-bash-logo.svg"
-                      alt="bash"
-                    />
-                  </div>
-                </div>
-                <div class="other-skills-row">
-                  <div class="other-el other-el-4">
-                    <img
-                      src="https://upload.wikimedia.org/wikipedia/commons/e/ec/Heroku_logo.svg"
-                      alt="heroku"
-                    />
-                  </div>
-                  <div class="other-el other-el-3">
-                    <img
-                      src="https://upload.wikimedia.org/wikipedia/commons/5/51/Google_Cloud_logo.svg"
-                      alt="googlecloud"
-                    />
-                  </div>
-                  <div class="other-el other-el-8">
-                    <img
-                      src="https://upload.wikimedia.org/wikipedia/commons/a/ab/Linux_Logo_in_Linux_Libertine_Font.svg"
-                      alt="linux"
-                    />
-                  </div>
-                  <div class="other-el other-el-9">
-                    <img
-                      src="https://upload.wikimedia.org/wikipedia/commons/3/30/MacOS_logo.svg"
-                      alt="macos"
-                    />
-                  </div>
-                </div>
-              </div>
+              <div class="other-skills" id="other-skills"></div>
             </div>
           </div>
           <div id="project" class="slide">
